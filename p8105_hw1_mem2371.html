@@ -373,7 +373,7 @@ summary {
 <p>This document contains homework one for the Building Blocks section of P8105.</p>
 <div id="problem-1" class="section level1">
 <h1>Problem 1</h1>
-<p>Problem one involves the creation of a data frame with various types of variables.</p>
+<p>The <strong>code chunk</strong> below involves the creation of a data frame with various types of variables.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>## ── Attaching packages ────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.0     ✓ purrr   0.3.4
@@ -392,7 +392,7 @@ summary {
 )
 
 mean(prob_one_df[[&quot;vec_norm&quot;]])</code></pre>
-<pre><code>## [1] 0.674619</code></pre>
+<pre><code>## [1] 0.4562671</code></pre>
 <pre class="r"><code>mean(prob_one_df[[&quot;vec_char&quot;]])</code></pre>
 <pre><code>## Warning in mean.default(prob_one_df[[&quot;vec_char&quot;]]): argument is not numeric or
 ## logical: returning NA</code></pre>
@@ -402,8 +402,22 @@ mean(prob_one_df[[&quot;vec_norm&quot;]])</code></pre>
 ## logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <pre class="r"><code>mean(prob_one_df[[&quot;vec_logical&quot;]])</code></pre>
-<pre><code>## [1] 0.8</code></pre>
-<p>The mean cannot be computed for the character and factor vectors, as they do not take on numerical values.</p>
+<pre><code>## [1] 0.6</code></pre>
+<p>The mean cannot be computed for the character and factor vectors, as they do not take on numerical values. The mean was erroneously computed for the logical variable, although it likely should not have been computed.</p>
+<p>This code chunk converts variables from one type to another.</p>
+<pre class="r"><code>num_log = as.numeric(prob_one_df[[&quot;vec_logical&quot;]])
+num_char = as.numeric(prob_one_df[[&quot;vec_char&quot;]])
+num_fac = as.numeric(prob_one_df[[&quot;vec_factor&quot;]])</code></pre>
+<p>The above conversions explain some of the findings from the mean calculations. Firstly, the numeric conversion demonstrates that R is reading the logical vector as a binary (0, 1) which explains why the mean was computed. The character variable cannot be converted to numeric. When converting the factor to numeric, it is converted as the three levels of the variable.</p>
+<p>The next code chunk does additional variable conversions.</p>
+<pre class="r"><code>num_log_random = as.numeric(prob_one_df[[&quot;vec_logical&quot;]]) * (prob_one_df[[&quot;vec_norm&quot;]])
+
+fact_log_random = as.factor(prob_one_df[[&quot;vec_logical&quot;]]) * (prob_one_df[[&quot;vec_norm&quot;]])</code></pre>
+<pre><code>## Warning in Ops.factor(as.factor(prob_one_df[[&quot;vec_logical&quot;]]),
+## (prob_one_df[[&quot;vec_norm&quot;]])): &#39;*&#39; not meaningful for factors</code></pre>
+<pre class="r"><code>fact_log = as.factor(prob_one_df[[&quot;vec_logical&quot;]])
+fact_num = as.numeric(fact_log) * (prob_one_df[[&quot;vec_norm&quot;]])</code></pre>
+<p>The warning above occurring for the second line of code is due to an attempt to multiply a non-numeric variable by a numeric variable.</p>
 </div>
 <div id="problem-2" class="section level1">
 <h1>Problem 2</h1>

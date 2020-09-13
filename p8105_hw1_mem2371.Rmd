@@ -9,7 +9,7 @@ This document contains homework one for the Building Blocks section of P8105.
 
 # Problem 1
 
-Problem one involves the creation of a data frame with various types of variables.
+The **code chunk** below involves the creation of a data frame with various types of variables. 
 
 ```{r}
 library(tidyverse)
@@ -28,6 +28,29 @@ mean(prob_one_df[["vec_factor"]])
 mean(prob_one_df[["vec_logical"]])
 ```
 
-The mean cannot be computed for the character and factor vectors, as they do not take on numerical values.
+The mean cannot be computed for the character and factor vectors, as they do not take on numerical values. The mean was erroneously computed for the logical variable, although it likely should not have been computed.
+
+This code chunk converts variables from one type to another.
+
+```{r, echo=TRUE, warning=FALSE}
+num_log = as.numeric(prob_one_df[["vec_logical"]])
+num_char = as.numeric(prob_one_df[["vec_char"]])
+num_fac = as.numeric(prob_one_df[["vec_factor"]])
+```
+
+The above conversions explain some of the findings from the mean calculations. Firstly, the numeric conversion demonstrates that R is reading the logical vector as a binary (0, 1) which explains why the mean was computed. The character variable cannot be converted to numeric. When converting the factor to numeric, it is converted as the three levels of the variable.
+
+The next code chunk does additional variable conversions.
+
+```{r}
+num_log_random = as.numeric(prob_one_df[["vec_logical"]]) * (prob_one_df[["vec_norm"]])
+
+fact_log_random = as.factor(prob_one_df[["vec_logical"]]) * (prob_one_df[["vec_norm"]])
+
+fact_log = as.factor(prob_one_df[["vec_logical"]])
+fact_num = as.numeric(fact_log) * (prob_one_df[["vec_norm"]])
+```
+
+The warning above occurring for the second line of code is due to an attempt to multiply a non-numeric variable by a numeric variable.
 
 # Problem 2
