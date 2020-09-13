@@ -1,21 +1,33 @@
 ---
-title: "Simple document"
-output: github_document
+title: "Homework 1"
+author: "Megan Marziali"
+date: "September 13, 2020"
+output: html_document
 ---
 
-I'm an R Markdown document! 
+This document contains homework one for the Building Blocks section of P8105.
 
-# Section 1
+# Problem 1
 
-Here's a **code chunk** that samples from 
-a _normal distribution_:
+Problem one involves the creation of a data frame with various types of variables.
 
 ```{r}
-samp = rnorm(100)
-length(samp)
+library(tidyverse)
+
+prob_one_df = tibble(
+  vec_norm = rnorm(10),
+  vec_char = c("the", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog", "today"),
+  vec_factor = factor(c("the", "the", "the", "fuzzy", "fuzzy", "fuzzy", "cat", "cat", "cat", "cat")),
+  # Denotes whether values in this data frame are greater than 0 or not
+  vec_logical = vec_norm > 0,
+)
+
+mean(prob_one_df[["vec_norm"]])
+mean(prob_one_df[["vec_char"]])
+mean(prob_one_df[["vec_factor"]])
+mean(prob_one_df[["vec_logical"]])
 ```
 
-# Section 2
+The mean cannot be computed for the character and factor vectors, as they do not take on numerical values.
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+# Problem 2
