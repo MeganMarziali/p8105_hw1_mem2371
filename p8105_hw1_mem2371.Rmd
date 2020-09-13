@@ -54,3 +54,20 @@ fact_num = as.numeric(fact_log) * (prob_one_df[["vec_norm"]])
 The warning above occurring for the second line of code is due to an attempt to multiply a non-numeric variable by a numeric variable.
 
 # Problem 2
+
+```{r}
+data("penguins", package = "palmerpenguins")
+
+summary(penguins)
+names(penguins)
+
+nrow(penguins)
+ncol(penguins)
+
+mean(penguins[["flipper_length_mm"]], na.rm = TRUE)
+```
+
+
+
+
+

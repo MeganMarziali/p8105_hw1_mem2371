@@ -392,7 +392,7 @@ summary {
 )
 
 mean(prob_one_df[[&quot;vec_norm&quot;]])</code></pre>
-<pre><code>## [1] 0.4562671</code></pre>
+<pre><code>## [1] 0.2725306</code></pre>
 <pre class="r"><code>mean(prob_one_df[[&quot;vec_char&quot;]])</code></pre>
 <pre><code>## Warning in mean.default(prob_one_df[[&quot;vec_char&quot;]]): argument is not numeric or
 ## logical: returning NA</code></pre>
@@ -421,6 +421,35 @@ fact_num = as.numeric(fact_log) * (prob_one_df[[&quot;vec_norm&quot;]])</code></
 </div>
 <div id="problem-2" class="section level1">
 <h1>Problem 2</h1>
+<pre class="r"><code>data(&quot;penguins&quot;, package = &quot;palmerpenguins&quot;)
+
+summary(penguins)</code></pre>
+<pre><code>##       species          island    bill_length_mm  bill_depth_mm  
+##  Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
+##  Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
+##  Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  
+##                                  Mean   :43.92   Mean   :17.15  
+##                                  3rd Qu.:48.50   3rd Qu.:18.70  
+##                                  Max.   :59.60   Max.   :21.50  
+##                                  NA&#39;s   :2       NA&#39;s   :2      
+##  flipper_length_mm  body_mass_g       sex           year     
+##  Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
+##  1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
+##  Median :197.0     Median :4050   NA&#39;s  : 11   Median :2008  
+##  Mean   :200.9     Mean   :4202                Mean   :2008  
+##  3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
+##  Max.   :231.0     Max.   :6300                Max.   :2009  
+##  NA&#39;s   :2         NA&#39;s   :2</code></pre>
+<pre class="r"><code>names(penguins)</code></pre>
+<pre><code>## [1] &quot;species&quot;           &quot;island&quot;            &quot;bill_length_mm&quot;   
+## [4] &quot;bill_depth_mm&quot;     &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;      
+## [7] &quot;sex&quot;               &quot;year&quot;</code></pre>
+<pre class="r"><code>nrow(penguins)</code></pre>
+<pre><code>## [1] 344</code></pre>
+<pre class="r"><code>ncol(penguins)</code></pre>
+<pre><code>## [1] 8</code></pre>
+<pre class="r"><code>mean(penguins[[&quot;flipper_length_mm&quot;]], na.rm = TRUE)</code></pre>
+<pre><code>## [1] 200.9152</code></pre>
 </div>
 
 
