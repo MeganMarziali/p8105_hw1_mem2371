@@ -2,7 +2,7 @@
 title: "Homework 1"
 author: "Megan Marziali"
 date: "September 13, 2020"
-output: html_document
+output: github_document
 ---
 
 This document contains homework one for the Building Blocks section of P8105.
@@ -67,6 +67,14 @@ ncol(penguins)
 mean(penguins[["flipper_length_mm"]], na.rm = TRUE)
 ```
 
+```{r}
+library(tidyverse)
+library(wesanderson)
+
+sp <- ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+
+sp + scale_color_manual(values = wes_palette( n = 3, name = "Moonrise2"))
+```
 
 
 
