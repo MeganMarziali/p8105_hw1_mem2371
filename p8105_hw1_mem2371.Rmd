@@ -5,7 +5,7 @@ date: "September 13, 2020"
 output: github_document
 ---
 
-This document contains Homework 1 for the Building Blocks section of P8105.
+This document contains a solution for Homework 1 for the Building Blocks section of P8105.
 
 # Problem 1
 
@@ -26,10 +26,10 @@ prob_one_df = tibble(
 The means for each variable in the data frame are calculated below.
 
 ```{r}
-mean(prob_one_df[["vec_norm"]])
-mean(prob_one_df[["vec_char"]])
-mean(prob_one_df[["vec_factor"]])
-mean(prob_one_df[["vec_logical"]])
+mean(pull(prob_one_df, vec_norm))
+mean(pull(prob_one_df, vec_char))
+mean(pull(prob_one_df, vec_factor))
+mean(pull(prob_one_df, vec_logical))
 ```
 
 The mean cannot be computed for the character and factor vectors, as they do not take on numerical values, which explains the occurrence of the above warnings. The mean was computed for the logical variable, although it likely should not have been computed as it relates instead to the number of "true" responses.
@@ -37,9 +37,17 @@ The mean cannot be computed for the character and factor vectors, as they do not
 This code chunk converts variables from one type to another.
 
 ```{r, echo=TRUE, warning=FALSE}
-num_log = as.numeric(prob_one_df[["vec_logical"]])
-num_char = as.numeric(prob_one_df[["vec_char"]])
-num_fac = as.numeric(prob_one_df[["vec_factor"]])
+num_of_log = as.numeric(pull(prob_one_df, vec_logical))
+
+num_of_log
+
+num_of_char = as.numeric(pull(prob_one_df, vec_char))
+
+num_of_char
+
+num_of_fac = as.numeric(pull(prob_one_df, vec_factor))
+
+num_of_fac
 ```
 
 The above conversions explain some of the findings from the mean calculations. Firstly, the numeric conversion demonstrates that R is reading the logical vector as a binary (0, 1) which explains why the mean was computed. The character variable cannot be converted to numeric. When converting the factor to numeric, it is converted as the three levels of the variable.
@@ -47,15 +55,22 @@ The above conversions explain some of the findings from the mean calculations. F
 The next code chunk does additional variable conversions.
 
 ```{r}
-num_log_random = as.numeric(prob_one_df[["vec_logical"]]) * (prob_one_df[["vec_norm"]])
+num_log_by_random = as.numeric(pull(prob_one_df, vec_logical)) * (pull(prob_one_df, vec_norm))
 
-fact_log_random = as.factor(prob_one_df[["vec_logical"]]) * (prob_one_df[["vec_norm"]])
+# Calling the variable to double-check the above function
 
-fact_log = as.factor(prob_one_df[["vec_logical"]])
-fact_num = as.numeric(fact_log) * (prob_one_df[["vec_norm"]])
+num_log_by_random 
+
+fact_log_by_random = as.factor(pull(prob_one_df, vec_logical)) * (pull(prob_one_df, vec_norm))
+
+fact_of_log = as.factor(pull(prob_one_df, vec_logical))
+
+fact_num_by_random = as.numeric(fact_log) * (pull(prob_one_df, vec_norm))
+
+fact_num_by_random
 ```
 
-The warning above occurring for the second line of code is due to an attempt to multiply a non-numeric variable by a numeric variable.
+The warning above occurring for the fact_log_random variable is due to an attempt to multiply a non-numeric variable by a numeric variable.
 
 # Problem 2
 
@@ -89,7 +104,8 @@ The **year** variable is a `r class(penguins$"year")` variable, with `r length(p
 The code chunk below creates a plot of bill length (x) and flipper length (y). Species are denoted with different colors.
 
 ```{r, warning = FALSE}
-library(tidyverse)
+# The library call below is purely for aesthetic reasons, to be able to alter the colors in the plot.
+
 library(wesanderson)
 
 fliper_length_plot <- ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
