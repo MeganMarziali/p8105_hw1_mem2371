@@ -20,7 +20,6 @@ prob_one_df = tibble(
   vec_norm = rnorm(10),
   vec_char = c("the", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog", "today"),
   vec_factor = factor(c("the", "the", "the", "fuzzy", "fuzzy", "fuzzy", "cat", "cat", "cat", "cat")),
-  # Denotes whether values in this data frame are greater than 0 or not
   vec_logical = vec_norm > 0,
 )
 ```
