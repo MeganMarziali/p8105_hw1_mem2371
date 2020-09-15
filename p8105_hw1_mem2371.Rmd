@@ -32,7 +32,7 @@ mean(prob_one_df[["vec_factor"]])
 mean(prob_one_df[["vec_logical"]])
 ```
 
-The mean cannot be computed for the character and factor vectors, as they do not take on numerical values. The mean was computed for the logical variable, although it likely should not have been computed as it relates instead to the number of "true" responses.
+The mean cannot be computed for the character and factor vectors, as they do not take on numerical values, which explains the occurrence of the above warnings. The mean was computed for the logical variable, although it likely should not have been computed as it relates instead to the number of "true" responses.
 
 This code chunk converts variables from one type to another.
 
@@ -59,6 +59,8 @@ The warning above occurring for the second line of code is due to an attempt to 
 
 # Problem 2
 
+### Descriptive Statistics
+
 The code chunk below is designed to call the correct package.
 ```{r}
 data("penguins", package = "palmerpenguins")
@@ -82,13 +84,21 @@ The **sex** variable is a `r class(penguins$"sex")` variable. This factor variab
 
 The **year** variable is a `r class(penguins$"year")` variable, with `r length(penguins$"year")` observations. The year variable has a minimum of `r min(penguins$"year")` and a maximum of `r max(penguins$"year")`. There are `r sum(is.na(penguins$"year"))` missing values for this variable.
 
+### Plot
+
+The code chunk below creates a plot of bill length (x) and flipper length (y). Species are denoted with different colors.
+
 ```{r, warning = FALSE}
 library(tidyverse)
 library(wesanderson)
 
-sp <- ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+fliper_length_plot <- ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 
-sp + scale_color_manual(values = wes_palette( n = 3, name = "Moonrise2"))
+fliper_length_plot + scale_color_manual(values = wes_palette( n = 3, name = "Moonrise2"))
+
+# The code below is to save the scatterplot.
+
+ggsave("flipper_length_plot.png")
 ```
 
 
