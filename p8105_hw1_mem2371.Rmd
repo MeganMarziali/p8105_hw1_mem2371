@@ -5,11 +5,11 @@ date: "September 13, 2020"
 output: github_document
 ---
 
-This document contains homework one for the Building Blocks section of P8105.
+This document contains Homework 1 for the Building Blocks section of P8105.
 
 # Problem 1
 
-The **code chunk** below involves the creation of a data frame with various types of variables. 
+The code chunk below involves the creation of a data frame with various types of variables. 
 
 ```{r}
 library(tidyverse)
@@ -21,14 +21,18 @@ prob_one_df = tibble(
   # Denotes whether values in this data frame are greater than 0 or not
   vec_logical = vec_norm > 0,
 )
+```
 
+The means for each variable in the data frame are calculated below.
+
+```{r}
 mean(prob_one_df[["vec_norm"]])
 mean(prob_one_df[["vec_char"]])
 mean(prob_one_df[["vec_factor"]])
 mean(prob_one_df[["vec_logical"]])
 ```
 
-The mean cannot be computed for the character and factor vectors, as they do not take on numerical values. The mean was erroneously computed for the logical variable, although it likely should not have been computed.
+The mean cannot be computed for the character and factor vectors, as they do not take on numerical values. The mean was computed for the logical variable, although it likely should not have been computed as it relates instead to the number of "true" responses.
 
 This code chunk converts variables from one type to another.
 
@@ -55,40 +59,30 @@ The warning above occurring for the second line of code is due to an attempt to 
 
 # Problem 2
 
+The code chunk below is designed to call the correct package.
 ```{r}
 data("penguins", package = "palmerpenguins")
-
-class(penguins[["species"]])
-length(penguins$"species")
-levels(penguins$"species")
-sum(is.na(penguins$"species"))
-sum(penguins$"species" == "Adelie")
-
-mean(penguins$"bill_length_mm", na.rm = TRUE, nsmall = 3)
-sd(penguins$"bill_length_mm", na.rm = TRUE)
-median(penguins$"bill_length_mm", na.rm = TRUE)
-IQR(penguins$"bill_length_mm", na.rm = TRUE)
-
-mean(penguins[["flipper_length_mm"]], na.rm = TRUE)
 ```
 
-The penguins data set includes variables `r names(penguins)`. It has `r nrow(penguins)` rows and `ncol(penguins)` columns.
+The penguins data set includes variables `r names(penguins)`. It has `r nrow(penguins)` rows and `r ncol(penguins)` columns.
 
-The **species** variable is a `r class(penguins$"species")` variable, with `r length(penguins$"species")` observations. This factor variable includes levels `r levels(penguins$"species")`: `r sum(penguins$"species" == "Adelie")` observations are classified as Adelie, `r sum(penguins$"species" == "Chinstrap")` as Chinstrap and `r sum(penguins$"species" == "Gentoo")` as Gentoo. The number of missing observations for this variable is `r sum(is.na(penguins$"species"))`.
+The **species** variable is a `r class(penguins$"species")` variable. This factor variable includes levels `r levels(penguins$"species")`: `r sum(penguins$"species" == "Adelie")` observations are classified as Adelie, `r sum(penguins$"species" == "Chinstrap")` as Chinstrap and `r sum(penguins$"species" == "Gentoo")` as Gentoo. There are `r sum(is.na(penguins$"species"))` missing values for this variable.
 
-The **island** variable is a `r class(penguins$"island")` variable, with `r length(penguins$"island")` observations. This factor variable includes levels `r levels(penguins$"island")`: `r sum(penguins$"island" == "Biscoe")` observations are classified as Biscoe, `r sum(penguins$"island" == "Dream")` as Dream and `r sum(penguins$"island" == "Torgersen")` as Torgersen. The number of missing observations for this variable is `r sum(is.na(penguins$"island"))`.
+The **island** variable is a `r class(penguins$"island")` variable. This factor variable includes levels `r levels(penguins$"island")`: `r sum(penguins$"island" == "Biscoe")` observations are classified as Biscoe, `r sum(penguins$"island" == "Dream")` as Dream and `r sum(penguins$"island" == "Torgersen")` as Torgersen. There are `r sum(is.na(penguins$"island"))` missing values for this variable.
 
-The **bill length** variable is a `r class(penguins$"bill_length_mm")` variable, with `r length(penguins$"bill_length_mm")` observations. The mean bill length is `r mean(penguins$"bill_length_mm", na.rm = TRUE)` with a standard deviation of `r sd(penguins$"bill_length_mm", na.rm = TRUE)`; the median is `r median(penguins$"bill_length_mm", na.rm = TRUE)` and interquartile (IQR) range of `r IQR(penguins$"bill_length_mm", na.rm = TRUE)`. 
+The **bill length** variable is a `r class(penguins$"bill_length_mm")` variable. The mean bill length is `r mean(penguins$"bill_length_mm", na.rm = TRUE)` with a standard deviation of `r sd(penguins$"bill_length_mm", na.rm = TRUE)`; the median is `r median(penguins$"bill_length_mm", na.rm = TRUE)` and interquartile (IQR) range of `r IQR(penguins$"bill_length_mm", na.rm = TRUE)`. There are `r sum(is.na(penguins$"bill_length_mm"))` missing values for this variable.
 
-The **bill depth** variable is a `r class(penguins$"bill_depth_mm")` variable, with `r length(penguins$"bill_depth_mm")` observations. The mean bill length is `r mean(penguins$"bill_depth_mm", na.rm = TRUE)` with a standard deviation of `r sd(penguins$"bill_depth_mm", na.rm = TRUE)`; the median is `r median(penguins$"bill_depth_mm", na.rm = TRUE)` and interquartile (IQR) range of `r IQR(penguins$"bill_depth_mm", na.rm = TRUE)`. 
+The **bill depth** variable is a `r class(penguins$"bill_depth_mm")` variable. The mean bill length is `r mean(penguins$"bill_depth_mm", na.rm = TRUE)` with a standard deviation of `r sd(penguins$"bill_depth_mm", na.rm = TRUE)`; the median is `r median(penguins$"bill_depth_mm", na.rm = TRUE)` and interquartile (IQR) range of `r IQR(penguins$"bill_depth_mm", na.rm = TRUE)`. There are `r sum(is.na(penguins$"bill_depth_mm"))` missing values for this variable.
 
-The **flipper length** variable is a `r class(penguins$"flipper_length_mm")` variable, with `r length(penguins$"flipper_length_mm")` observations. The mean bill length is `r mean(penguins$"flipper_length_mm", na.rm = TRUE)` with a standard deviation of `r sd(penguins$"flipper_length_mm", na.rm = TRUE)`; the median is `r median(penguins$"flipper_length_mm", na.rm = TRUE)` and interquartile (IQR) range of `r IQR(penguins$"flipper_length_mm", na.rm = TRUE)`. 
+The **flipper length** variable is a `r class(penguins$"flipper_length_mm")` variable. The mean bill length is `r mean(penguins$"flipper_length_mm", na.rm = TRUE)` with a standard deviation of `r sd(penguins$"flipper_length_mm", na.rm = TRUE)`; the median is `r median(penguins$"flipper_length_mm", na.rm = TRUE)` and interquartile (IQR) range of `r IQR(penguins$"flipper_length_mm", na.rm = TRUE)`. There are `r sum(is.na(penguins$"flipper_length_mm"))` missing values for this variable.
 
-The **body mass** variable is a `r class(penguins$"body_mass_g")` variable, with `r length(penguins$"body_mass_g")` observations. The mean bill length is `r mean(penguins$"body_mass_g", na.rm = TRUE)` with a standard deviation of `r sd(penguins$"body_mass_g", na.rm = TRUE)`; the median is `r median(penguins$"body_mass_g", na.rm = TRUE)` and interquartile (IQR) range of `r IQR(penguins$"body_mass_g", na.rm = TRUE)`. 
+The **body mass** variable is a `r class(penguins$"body_mass_g")` variable. The mean bill length is `r mean(penguins$"body_mass_g", na.rm = TRUE)` with a standard deviation of `r sd(penguins$"body_mass_g", na.rm = TRUE)`; the median is `r median(penguins$"body_mass_g", na.rm = TRUE)` and interquartile (IQR) range of `r IQR(penguins$"body_mass_g", na.rm = TRUE)`. There are `r sum(is.na(penguins$"body_mass_g"))` missing values for this variable.
 
+The **sex** variable is a `r class(penguins$"sex")` variable. This factor variable includes levels `r levels(penguins$"sex")`: `r sum(penguins$"sex" == "Male")` observations are classified as male and `r sum(penguins$"sex" == "Female")` as female. The number of missing observations for this variable is `r sum(is.na(penguins$"sex"))`. There are `r sum(is.na(penguins$"sex"))` missing values for this variable.
 
+The **year** variable is a `r class(penguins$"year")` variable, with `r length(penguins$"year")` observations. The year variable has a minimum of `r min(penguins$"year")` and a maximum of `r max(penguins$"year")`. There are `r sum(is.na(penguins$"year"))` missing values for this variable.
 
-```{r}
+```{r, warning = FALSE}
 library(tidyverse)
 library(wesanderson)
 
